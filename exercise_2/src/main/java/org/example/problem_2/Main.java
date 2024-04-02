@@ -68,15 +68,10 @@ public class Main {
 
         byte[] input = (block + nonce).getBytes(); // Convert the concatenation of the block and nonce to bytes
 
-        byte[] hash = computeSHA256(computeSHA256(input,digest),digest); // Compute the SHA-256 has of the Input data twice
+        byte[] hash = digest.digest(digest.digest(input));// Compute the SHA-256 has of the Input data twice
 
         BigInteger hashInt = new BigInteger(1,hash); // Convert the resulting hash value back to a BigInteger
 
         return hashInt.compareTo(target) < 0; // Check if the hash value is less than the target threshold
-    }
-
-    private static byte[] computeSHA256(byte[] input, MessageDigest digest) {
-        // Compute the SHA-256 hash of the input
-        return digest.digest(input); // and return the result
     }
 }

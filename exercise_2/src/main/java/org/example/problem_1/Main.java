@@ -11,7 +11,7 @@ public class Main {
         BigInteger target = new BigInteger("100000000000000000000000000000000000000000000000000000000000",
                 16); //the target threshold for the hashing
 
-        long nonce = 0; // Determine the winner nonce using the proof-of-work algorithm
+        long nonce; // Determine the winner nonce using the proof-of-work algorithm
         try {
             nonce = proveWork(block,target); // the winner nonce
         } catch (NoSuchAlgorithmException e) {
@@ -35,20 +35,14 @@ public class Main {
     }
 
     public static boolean checkHash(String block, BigInteger target, long nonce) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
 
         byte[] input = (block + nonce).getBytes();  // Convert the concatenation of the block and nonce to bytes
 
-        byte[] hash = computeSHA256(computeSHA256(input)); // Compute the SHA-256 has of the Input data twice
+        byte[] hash = digest.digest(digest.digest(input));// Compute the SHA-256 has of the Input data twice
 
         BigInteger hashInt = new BigInteger(1,hash); // Convert the resulting hash value back to a BigInteger
 
         return hashInt.compareTo(target) < 0; // Check if the hash value is less than the target threshold
-    }
-
-    private static byte[] computeSHA256(byte[] input) throws NoSuchAlgorithmException{
-
-        MessageDigest digest = MessageDigest.getInstance("SHA-256"); // Get an instance of SHA-256 MessageDigest
-
-        return digest.digest(input); // Compute the SHA-256 hash of the input byte array
     }
 }
