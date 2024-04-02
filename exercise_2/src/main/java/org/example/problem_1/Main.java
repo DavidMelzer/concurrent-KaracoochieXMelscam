@@ -40,7 +40,7 @@ public class Main {
 
         byte[] hash = computeSHA256(computeSHA256(input)); // Compute the SHA-256 has of the Input data twice
 
-        BigInteger hashInt = new BigInteger(1,hash); // Convert the resulting hash value to a BigInteger
+        BigInteger hashInt = new BigInteger(1,hash); // Convert the resulting hash value back to a BigInteger
 
         return hashInt.compareTo(target) < 0; // Check if the hash value is less than the target threshold
     }
