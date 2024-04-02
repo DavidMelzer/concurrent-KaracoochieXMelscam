@@ -3,5 +3,13 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.11 (concurrent-KaracoochieXMelscam)" />
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/exercise_2/pom.xml" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (concurrent-KaracoochieXMelscam)" project-jdk-type="Python SDK" />
 </project>
