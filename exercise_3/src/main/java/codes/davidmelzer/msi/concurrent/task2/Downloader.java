@@ -47,15 +47,12 @@ public class Downloader {
     public static void main(String[] args) throws Exception {
         final Object lock = new Object();
 
-        ProgressListener listener = new ProgressListener() {
-            @Override
-            public void onProgress(int current) {
-                synchronized (lock) {
-                    System.out.println("Progress: " + current);
-                    // Simulate doing some work that also requires locking on the main thread's lock object
-                    // This could potentially create a deadlock if the main thread is waiting for this listener to complete its work
-                    // while holding onto the lock.
-                }
+        ProgressListener listener = current -> {
+            synchronized (lock) {
+                System.out.println("Progress: " + current);
+                // Simulate doing some work that also requires locking on the main thread's lock object
+                // This could potentially create a deadlock if the main thread is waiting for this listener to complete its work
+                // while holding onto the lock.
             }
         };
 
